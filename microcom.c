@@ -136,6 +136,7 @@ void main_usage(int exitcode, char *str, char *dev)
 		"    -p devfile      use the specified serial port device (%s);\n"
 		"    -s speed        use specified baudrate (%d)\n"
 		"    -t host:port    work in telnet (rfc2217) mode\n"
+		"    -f              remove lockfile (if it exists)\n"
 		"microcom provides session logging in microcom.log file\n",
 		DEFAULT_DEVICE, DEFAULT_BAUDRATE);
 	fprintf(stderr, "Exitcode %d - %s %s\n\n", exitcode, str, dev);
@@ -184,6 +185,16 @@ int main(int argc, char *argv[])
 				break;
 			case 'd':
 				debug = 1;
+		}
+	}
+
+	printf("optind %d   %d\n", (int)optind, argc-optind);
+	if (argc - optind > 0) {
+		if (device == DEFAULT_DEVICE && argc - optind == 1) {
+			// interpret a single argument as device
+			device = argv[optind];
+		} else {
+			main_usage(1, "", "");
 		}
 	}
 
