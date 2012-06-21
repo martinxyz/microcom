@@ -20,7 +20,7 @@
 #****************************************************************************/
 
 CFLAGS		+= -Wall -O2 -g
-LDFLAGS		+= -lreadline -lpthread
+LDLIBS		+= -lreadline -lpthread
 CPPFLAGS	+= -DPKG_VERSION="\"2012.06.0\"" -DPF_CAN=29 -DAF_CAN=PF_CAN
 
 
