@@ -1,0 +1,7 @@
+This is a minimalistic fork of the pengutronix.de branch of microcom.
+http://git.pengutronix.de/?p=tools/microcom.git;a=summary
+
+It uses the old (and fast-to-use) menu instead of the new commandline
+prompt. It doesn't include the recently added commands that are specific
+to i.MX devices.
+
