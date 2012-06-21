@@ -119,6 +119,7 @@ struct ios_ops * serial_init(char *device)
 	int fd;
 	char *substring;
 	long pid;
+	int res;
 
 	ops = malloc(sizeof(*ops));
 	if (!ops)
@@ -143,8 +144,12 @@ struct ios_ops * serial_init(char *device)
 
 	fd = open(lockfile, O_RDONLY);
 	if (fd >= 0 && !opt_force) {
+		res = read(fd, &pid, sizeof(long));
+		if (res != sizeof(long)) pid = 0;
 		close(fd);
-		main_usage(3, "lockfile for port exists", device);
+		fprintf(stderr, "%s is already in use by PID %d!\n", device, pid);
+		fprintf(stderr, "(use -f to continue anyway)\n");
+		exit(3);
 	}
 
 	if (fd >= 0 && opt_force) {
