@@ -147,7 +147,7 @@ struct ios_ops * serial_init(char *device)
 		res = read(fd, &pid, sizeof(long));
 		if (res != sizeof(long)) pid = 0;
 		close(fd);
-		fprintf(stderr, "%s is already in use by PID %d!\n", device, pid);
+		fprintf(stderr, "%s is already in use by PID %ld!\n", device, pid);
 		fprintf(stderr, "(use -f to continue anyway)\n");
 		exit(3);
 	}
